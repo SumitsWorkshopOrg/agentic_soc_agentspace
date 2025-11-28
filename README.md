@@ -1,48 +1,7 @@
 # Agentic SOC Deployment Guide
 
 This guide provides a streamlined workflow to deploy a custom Agentic SOC using Google Gemini Enterprise and Google SecOps.
-
-graph TD
-    %% Define Styles
-    classDef gcp fill:#e8f0fe,stroke:#4285f4,stroke-width:2px,color:#000;
-    classDef ext fill:#fce8e6,stroke:#db4437,stroke-width:2px,color:#000;
-    classDef client fill:#e6f4ea,stroke:#0f9d58,stroke-width:2px,color:#000;
-
-    subgraph "Client Side"
-        User([User / Analyst]) -->|Chat Interface| GemEnt[Gemini Enterprise App]
-        class User,GemEnt client
-    end
-
-    subgraph "Google Cloud Platform (Vertex AI)"
-        GemEnt -->|Invokes| AgentEngine[Agent Engine\n(Reasoning Engine)]
-        
-        subgraph "The 'Brain' (ADK Agent)"
-            AgentEngine -->|Loads| Model[Gemini 1.5 Pro/Flash]
-            AgentEngine -->|Consults| RAG[RAG Corpus\n(Runbooks)]
-        end
-
-        subgraph "The 'Hands' (MCP Servers)"
-            AgentEngine -- MCP Protocol --> MCPRouter{MCP Router}
-            
-            MCPRouter -->|List Tools| SecOps[Chronicle MCP]
-            MCPRouter -->|List Tools| GTI[Threat Intel MCP]
-            MCPRouter -->|List Tools| SOAR[Siemplify MCP]
-            MCPRouter -->|List Tools| SCC[Security Command Center MCP]
-        end
-        class AgentEngine,Model,RAG,MCPRouter,SecOps,GTI,SOAR,SCC gcp
-    end
-
-    subgraph "External APIs"
-        SecOps -->|API Call| API_Chronicle[Chronicle API]
-        GTI -->|API Call| API_VT[VirusTotal API]
-        SOAR -->|API Call| API_Siemplify[SOAR API]
-        class API_Chronicle,API_VT,API_Siemplify ext
-    end
-
-    %% Edge Labels for technical context
-    linkStyle 1 stroke:#4285f4,stroke-width:2px;
-    linkStyle 4 stroke:#db4437,stroke-width:2px,dasharray: 5 5;
-    
+ 
 ## 📋 Prerequisites
 * **Google Cloud Project** (Owner permissions)
 * **Google SecOps** instance
