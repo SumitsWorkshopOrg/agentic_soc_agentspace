@@ -81,13 +81,8 @@ echo "------------------------------------------------"
 
 ## ⚙️ Part 3: Configuration
 
-### 1. Create Gemini App (CLI Method)
-Instead of using the GUI, run this command to create the app and get your ID instantly.
-
-```bash
-python manage.py agentspace create-app --name "Google Security Agent" --type SOLUTION_TYPE_CHAT
-```
-*Copy the `AGENTSPACE_APP_ID` from the output.*
+### 1. Create a new Gemini App from GCP Console
+*Copy the `AGENTSPACE_APP_ID` from the UI.*
 
 ### 2. Update Configuration
 Open your `.env` file (`nano .env`) and update the following values:
