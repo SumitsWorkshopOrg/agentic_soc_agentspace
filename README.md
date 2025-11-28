@@ -13,7 +13,7 @@ This guide provides a streamlined workflow to deploy a custom Agentic SOC using 
 ## 🚀 Part 1: Initial Setup
 
 ### 1. Configure Environment
-[cite_start]Open Cloud Shell and run the following "all-in-one" block to enable APIs and setup the repository [cite: 12-27].
+Open Cloud Shell and run the following "all-in-one" block to enable APIs and setup the repository.
 
 ```bash
 # 1. Enable APIs
@@ -42,7 +42,7 @@ pip install -r requirements.txt
 ## 🏗️ Part 2: Infrastructure Deployment
 
 ### 1. Create Knowledge Base (RAG)
-[cite_start]Create the RAG corpus for your security runbooks [cite: 28-33].
+Create the RAG corpus for your security runbooks.
 
 **⚠️ IMPORTANT:** Copy the `RAG_CORPUS_ID` from the output (e.g., `projects/.../ragCorpora/...`). You will need this for the `.env` file.
 
@@ -51,7 +51,7 @@ make rag-create NAME="Security Runbooks"
 ```
 
 ### 2. Create Staging Bucket & Service Account
-[cite_start]Run this script to automatically create your bucket, service account, and download the required JSON key [cite: 35-61].
+Run this script to automatically create your bucket, service account, and download the required JSON key.
 
 ```bash
 # Set Variables
@@ -90,7 +90,7 @@ python manage.py agentspace create-app --name "Google Security Agent" --type SOL
 *Copy the `AGENTSPACE_APP_ID` from the output.*
 
 ### 2. Update Configuration
-[cite_start]Open your `.env` file (`nano .env`) and update the following values [cite: 229-244]:
+Open your `.env` file (`nano .env`) and update the following values:
 
 * `GCP_STAGING_BUCKET`: (From Part 2 output)
 * `CHRONICLE_SERVICE_ACCOUNT_PATH`: (From Part 2 output)
@@ -101,7 +101,7 @@ python manage.py agentspace create-app --name "Google Security Agent" --type SOL
 * `GTI_API_KEY`: Your VirusTotal Key
 
 ### 3. Grant IAM Permissions
-[cite_start]Grant the AI agents access to your data [cite: 247-264]:
+Grant the AI agents access to your data:
 
 ```bash
 export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
@@ -123,7 +123,7 @@ gcloud storage buckets add-iam-policy-binding $BUCKET_NAME --member="serviceAcco
 ## 🚀 Part 4: Deployment
 
 ### 1. Deploy Agent Engine (Automated)
-[cite_start]Run this command to deploy the agent and **automatically update your .env file** with the result [cite: 267-272].
+Run this command to deploy the agent and **automatically update your .env file** with the result.
 
 ```bash
 make agent-engine-deploy 2>&1 | tee deploy.log
